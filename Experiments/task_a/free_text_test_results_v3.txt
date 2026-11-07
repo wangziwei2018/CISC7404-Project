@@ -1,0 +1,57 @@
+test_dataset_reproducibility (__main__.SpecificationTests.test_dataset_reproducibility) ... ok
+test_diagnostic_denominators (__main__.SpecificationTests.test_diagnostic_denominators) ... ok
+test_exhaustive_one_step_agreement (__main__.SpecificationTests.test_exhaustive_one_step_agreement) ... ok
+test_fixed_parameter_periodicity (__main__.SpecificationTests.test_fixed_parameter_periodicity) ... ok
+test_hand_calculated_branches_and_equality (__main__.SpecificationTests.test_hand_calculated_branches_and_equality) ... ok
+test_hand_calculated_multistep (__main__.SpecificationTests.test_hand_calculated_multistep) ... ok
+test_invalid_inputs (__main__.SpecificationTests.test_invalid_inputs) ... ok
+test_negative_state_from_approved_initial_range (__main__.SpecificationTests.test_negative_state_from_approved_initial_range) ... ok
+test_parallel_no_shared_mutable_state (__main__.SpecificationTests.test_parallel_no_shared_mutable_state) ... ok
+test_parser_positive_forms (__main__.SpecificationTests.test_parser_positive_forms) ... ok
+test_parser_wrong_swapped_incomplete_ambiguous (__main__.SpecificationTests.test_parser_wrong_swapped_incomplete_ambiguous) ... ok
+test_primary_metric_independent_of_trace (__main__.SpecificationTests.test_primary_metric_independent_of_trace) ... ok
+test_recovery_and_missing_trace (__main__.SpecificationTests.test_recovery_and_missing_trace) ... ok
+test_sampling_call_contract (__main__.SpecificationTests.test_sampling_call_contract) ... ok
+test_seeded_random_trajectories_and_bounds (__main__.SpecificationTests.test_seeded_random_trajectories_and_bounds) ... ok
+test_seeded_sampling_distribution (__main__.SpecificationTests.test_seeded_sampling_distribution) ... ok
+test_state_convergence_counterexample (__main__.SpecificationTests.test_state_convergence_counterexample) ... ok
+test_u_equal_v_invariant (__main__.SpecificationTests.test_u_equal_v_invariant) ... ok
+test_workload (__main__.SpecificationTests.test_workload) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 1.107s
+
+OK
+test_adversarial_cases (__main__.FreeTextAuditTests.test_adversarial_cases) ... ok
+test_full_state_is_not_difference_only_convergence (__main__.FreeTextAuditTests.test_full_state_is_not_difference_only_convergence) ... ok
+test_gold_independent_extraction (__main__.FreeTextAuditTests.test_gold_independent_extraction) ... ok
+test_invalid_api_inputs (__main__.FreeTextAuditTests.test_invalid_api_inputs) ... ok
+test_no_score_filtering_by_da_leakage_or_truncation (__main__.FreeTextAuditTests.test_no_score_filtering_by_da_leakage_or_truncation) ... ok
+test_primary_and_conditional_denominators (__main__.FreeTextAuditTests.test_primary_and_conditional_denominators) ... ok
+test_recovery_counts_consecutive_observed_errors (__main__.FreeTextAuditTests.test_recovery_counts_consecutive_observed_errors) ... ok
+test_seeded_wrong_final_never_uses_intermediate (__main__.FreeTextAuditTests.test_seeded_wrong_final_never_uses_intermediate) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.016s
+
+OK
+test_adversarial_cases (__main__.FreeTextAuditTests.test_adversarial_cases) ... ok
+test_full_state_is_not_difference_only_convergence (__main__.FreeTextAuditTests.test_full_state_is_not_difference_only_convergence) ... ok
+test_gold_independent_extraction (__main__.FreeTextAuditTests.test_gold_independent_extraction) ... ok
+test_invalid_api_inputs (__main__.FreeTextAuditTests.test_invalid_api_inputs) ... ok
+test_no_score_filtering_by_da_leakage_or_truncation (__main__.FreeTextAuditTests.test_no_score_filtering_by_da_leakage_or_truncation) ... ok
+test_primary_and_conditional_denominators (__main__.FreeTextAuditTests.test_primary_and_conditional_denominators) ... ok
+test_recovery_counts_consecutive_observed_errors (__main__.FreeTextAuditTests.test_recovery_counts_consecutive_observed_errors) ... ok
+test_seeded_wrong_final_never_uses_intermediate (__main__.FreeTextAuditTests.test_seeded_wrong_final_never_uses_intermediate) ... ok
+test_component_and_diagnostic_denominators (__main__.V3PolicyTests.test_component_and_diagnostic_denominators) ... ok
+test_conflicting_final_claims_are_not_reasoning (__main__.V3PolicyTests.test_conflicting_final_claims_are_not_reasoning) ... ok
+test_duplicate_declarations_are_not_leakage (__main__.V3PolicyTests.test_duplicate_declarations_are_not_leakage) ... ok
+test_leakage_does_not_change_content_score (__main__.V3PolicyTests.test_leakage_does_not_change_content_score) ... ok
+test_mixed_scoring_versions_rejected (__main__.V3PolicyTests.test_mixed_scoring_versions_rejected) ... ok
+test_new_case_ambiguity_labels (__main__.V3PolicyTests.test_new_case_ambiguity_labels) ... ok
+test_truncation_alias_unknown_and_nontruncated_malformed (__main__.V3PolicyTests.test_truncation_alias_unknown_and_nontruncated_malformed) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.028s
+
+OK
