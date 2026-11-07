@@ -20,7 +20,7 @@
     "seeded_wrong_final_cases": 500
   },
   "v3_tests": {
-    "tests_run": 15,
+    "tests_run": 19,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
@@ -253,8 +253,8 @@
   "model_inference": "not_run",
   "stage1_and_v2_hashes_verified": true,
   "sha256": {
-    "free_text_scoring_v3.ipynb": "167d230a41fb8e6def2a64d1097649de5d57573f4ab5aaf71861766afa7efb3f",
-    "free_text_scoring_v3_tests.ipynb": "dae05b9c62a54fc3be7250bfe948c96c0db514e115bbd8a7136589fe1596d9ef",
+    "free_text_scoring_v3.ipynb": "64d94370186d4c10fd413dc0c813c4872e82960ed471931584097b8468387f86",
+    "free_text_scoring_v3_tests.ipynb": "c6903fc7dc33a4baed2fa7608bae373b5e80c9783d025b35d9e658384d9860de",
     "parser_case_results_v3.jsonl": "bce25529ca614713bcb11f91d0e47b4e89d6d06fa3b6b4ce8e881524dff8a1ef"
   }
 }

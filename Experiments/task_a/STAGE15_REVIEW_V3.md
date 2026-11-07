@@ -85,7 +85,7 @@ A、B分量准确率各2/5=40%；条件分量准确率各2/3≈66.67%。
 |---|---|
 | Stage 1原回归 | 19/19通过；291600种单步组合、1000条长轨迹性质检查保留 |
 | v2评分回归 | 8/8通过；原68条标注保持原结果 |
-| v3评分与新增策略 | 15/15通过，0失败、0错误、0跳过 |
+| v3评分与新增策略 | 19/19通过（原15项 + 空行索引回归4项），0失败、0错误、0跳过 |
 | v3手工文本样例 | 原68条加24条，共92/92符合v3标注期望 |
 | 随机中间答案保护 | 500组，每组错误最终答案与不完整最终答案各1次，共1000次检查通过 |
 | 版本与数据保护 | Stage 1、v2所有已有Task A文件与续接时SHA256一致 |
@@ -93,7 +93,7 @@ A、B分量准确率各2/5=40%；条件分量准确率各2/3≈66.67%。
 人工样例是模拟真实自由文本形态的对抗文本，不是真实模型生成。92/92是标注决策符合率，不是模型准确率或自然输出解析成功率。
 每一项 unittest 的实际名称和结果见 free_text_test_results_v3.txt；每一个手工文本的原文、期望、实际结果见 parser_case_results_v3.jsonl。
 
-v3的15项分别是：
+v3的19项分别是：
 
 | 测试 | 结果 |
 |---|---|
@@ -112,6 +112,35 @@ v3的15项分别是：
 | test_mixed_scoring_versions_rejected | PASS |
 | test_new_case_ambiguity_labels | PASS |
 | test_truncation_alias_unknown_and_nontruncated_malformed | PASS |
+| test_blank_before_final_with_competing_pair | PASS |
+| test_blank_after_multiline_final_with_competing_pair | PASS |
+| test_blank_after_final_with_retraction | PASS |
+| test_blank_after_final_with_safe_truncated_tail | PASS |
+
+## 原始行号统一与空行回归修复
+
+本次基于 `d97fc553d01339ef32570620d298bec22aa6190c`，仅修改用户指定的五个 v3 文件。
+核对基准后发现：`consumed.update(span)` 实际保存过滤后位置，并非原始行号；两处读取也使用过滤后位置。
+因此基准对所列四类示例已按原规则处理，本次不能据此宣称复现了基准误判。修复统一原始行号不变量，防止混用两套索引。
+
+- 写入同步改为 `consumed.update(items[p][0] for p in span)`，与返回的 `answer_line_indices` 一致。
+- 未标记候选检查直接遍历 `items` 中的 `raw_index`，判断是否属于 `consumed`。
+- 最终答案尾段检查直接比较 `items` 中的 `raw_index` 与 `max(consumed)`。
+
+没有重构其他函数，没有改变抽取策略、评分规则、DA泄漏定义或统计分母。
+新增4个 `V3PolicyTests` 方法，共21个子场景，均显式检查 `answer_parse_ok`、`parse_reason`、`ambiguity`：
+
+| 空行情形 | 预期解析 / 原因 / 歧义 | 子场景 |
+|---|---|---|
+| 最终答案前有空行，后跟冲突裸pair | False / unlabelled_competing_answer / True | 3 |
+| 多行A/B最终声明后有空行及冲突裸pair | False / unlabelled_competing_answer / True | 3 |
+| 最终答案后有空行及撤回说明，stop/length | False / text_after_final_answer / False | 6 |
+| 完整最终答案后有空行及安全无数字尾段，length | True / explicit_final / False | 9 |
+
+最后一组还验证 `answer_ok`、`truncated`、原文保留及原始行号，覆盖单行、跨行pair和跨行A/B。
+测试Notebook仅回读比对已有 `parser_case_results_v3.jsonl`，不覆盖历史逐例结果；原68条标注和已有92条结果保持不变。
+92条统计仍为 **synthetic parser audit**，表示人工标注决策符合率，不能描述为模型准确率。
+本次CPU执行：Stage 1 19/19、v2 8/8、v3 19/19；原500组随机检查（1000次响应检查）通过。未运行模型。
 
 ## 保留的轨迹指标分母
 
@@ -137,10 +166,10 @@ D相同不代表完整状态合流：u=2,v=1时，(45,43)与(42,46)分别变成(
 
 评分接口已具备首次小规模Qwen3-4B探针的条件；模型运行仍需单独批准。冻结v3后若扩充语法，须另立版本并重评两模式所有原始输出，保留旧结果，不能只重评有利样本。
 
-## 文件变更与复现
+## 文件变更与复现（区分初次交付与本次修复）
 
-本轮新增：free_text_scoring_v3.ipynb、free_text_scoring_v3_tests.ipynb、parser_case_results_v3.jsonl、free_text_audit_results_v3.json、free_text_test_results_v3.txt、STAGE15_REVIEW_V3.md。
-本轮仅向record.md追加完成记录。之前的Stage 1和v2文件均原样保留，未覆盖历史实验。
+v3初次交付新增：free_text_scoring_v3.ipynb、free_text_scoring_v3_tests.ipynb、parser_case_results_v3.jsonl、free_text_audit_results_v3.json、free_text_test_results_v3.txt、STAGE15_REVIEW_V3.md。
+v3初次交付曾向record.md追加完成记录；本次保留该未提交变更，不修改或提交record.md。Stage 1和v2文件均原样保留，未覆盖历史实验。
 
 从仓库根目录，沿用现有CPU虚拟环境和Jupyter可写目录设置，运行：
 
@@ -151,6 +180,6 @@ D相同不代表完整状态合流：u=2,v=1时，(45,43)与(42,46)分别变成(
   --ExecutePreprocessor.timeout=180
 ```
 
-该notebook直接读取已有68条样例，仅执行旧测试单元，不执行Stage 1数据生成单元。派生v3评分结果会刷新；旧数据、旧结果不覆盖。
-Git标准diff不包含未跟踪文件，不能用“只有record.md变更”描述全部工作。本轮新文件差异另保存到 `/workspace/scratch/task_a_stage15_review.patch` 供审查；Git状态与完整文件清单见本次交付消息。
-未commit、push、merge、reset或切换分支。完成后停止，等待人工审查。
+该notebook直接读取已有68条样例，仅执行旧测试单元，不执行Stage 1数据生成单元。本次刷新v3审查汇总JSON；已有92条逐例结果仅回读比对，旧数据、旧结果不覆盖。完整执行日志从临时执行Notebook的stderr流导出到free_text_test_results_v3.txt。
+Git标准diff不包含未跟踪文件，不能用“只有record.md变更”描述全部工作。初次交付的新文件差异曾另存到 `/workspace/scratch/task_a_stage15_review.patch`；本次修复差异以五个文件的Git提交为准，工作区状态见本次交付消息。
+初次交付时尚未commit或push。本次按用户授权在work提交并推送上述五个文件，提交哈希与推送结果以交付消息为准；不merge、reset或切换分支。完成后停止，等待人工审查。

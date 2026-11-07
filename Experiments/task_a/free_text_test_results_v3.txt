@@ -19,7 +19,7 @@ test_u_equal_v_invariant (__main__.SpecificationTests.test_u_equal_v_invariant) 
 test_workload (__main__.SpecificationTests.test_workload) ... ok
 
 ----------------------------------------------------------------------
-Ran 19 tests in 1.107s
+Ran 19 tests in 1.295s
 
 OK
 test_adversarial_cases (__main__.FreeTextAuditTests.test_adversarial_cases) ... ok
@@ -32,7 +32,7 @@ test_recovery_counts_consecutive_observed_errors (__main__.FreeTextAuditTests.te
 test_seeded_wrong_final_never_uses_intermediate (__main__.FreeTextAuditTests.test_seeded_wrong_final_never_uses_intermediate) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.016s
+Ran 8 tests in 0.020s
 
 OK
 test_adversarial_cases (__main__.FreeTextAuditTests.test_adversarial_cases) ... ok
@@ -43,6 +43,10 @@ test_no_score_filtering_by_da_leakage_or_truncation (__main__.FreeTextAuditTests
 test_primary_and_conditional_denominators (__main__.FreeTextAuditTests.test_primary_and_conditional_denominators) ... ok
 test_recovery_counts_consecutive_observed_errors (__main__.FreeTextAuditTests.test_recovery_counts_consecutive_observed_errors) ... ok
 test_seeded_wrong_final_never_uses_intermediate (__main__.FreeTextAuditTests.test_seeded_wrong_final_never_uses_intermediate) ... ok
+test_blank_after_final_with_retraction (__main__.V3PolicyTests.test_blank_after_final_with_retraction) ... ok
+test_blank_after_final_with_safe_truncated_tail (__main__.V3PolicyTests.test_blank_after_final_with_safe_truncated_tail) ... ok
+test_blank_after_multiline_final_with_competing_pair (__main__.V3PolicyTests.test_blank_after_multiline_final_with_competing_pair) ... ok
+test_blank_before_final_with_competing_pair (__main__.V3PolicyTests.test_blank_before_final_with_competing_pair) ... ok
 test_component_and_diagnostic_denominators (__main__.V3PolicyTests.test_component_and_diagnostic_denominators) ... ok
 test_conflicting_final_claims_are_not_reasoning (__main__.V3PolicyTests.test_conflicting_final_claims_are_not_reasoning) ... ok
 test_duplicate_declarations_are_not_leakage (__main__.V3PolicyTests.test_duplicate_declarations_are_not_leakage) ... ok
@@ -52,6 +56,6 @@ test_new_case_ambiguity_labels (__main__.V3PolicyTests.test_new_case_ambiguity_l
 test_truncation_alias_unknown_and_nontruncated_malformed (__main__.V3PolicyTests.test_truncation_alias_unknown_and_nontruncated_malformed) ... ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 0.028s
+Ran 19 tests in 0.039s
 
 OK
