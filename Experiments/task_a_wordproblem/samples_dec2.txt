@@ -1,0 +1,93 @@
+wrote 45 records -> samples_dec2.jsonl (deterministic, all gold re-solved)
+overall (serial): {"sum_all_numbers": 0.0, "apply_both_clauses": 0.0, "always_loss": 0.12, "always_gain": 0.08, "ans_in_text": 0.0, "last_threshold_guess": 0.0, "start_unchanged": 0.0, "single_branch_error_still_correct": 0.0, "loss_branch_share": 0.4513, "n_serial": 25}
+ d= 1 n=5 chars~193 both=0.000 aL=0.600 aG=0.400 in_text=0.000 lastT=0.000 flip_ok=0.000
+ d= 3 n=5 chars~435 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.000
+ d= 5 n=5 chars~683 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.000
+ d=10 n=5 chars~1231 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.000
+ d=20 n=5 chars~2425 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.000
+parallel (w,W,chars): [(1, 1, 200), (1, 1, 250), (3, 5, 700), (3, 5, 750), (3, 5, 800), (5, 9, 1150), (5, 9, 1200), (5, 9, 1250), (10, 19, 2450), (10, 19, 2500), (10, 19, 2700)]
+
+===== serial d=1 ans=107.00 =====
+Hana has $112.22. A box of stamps at the shop has 31 pieces. First, Hana checks her wallet: if she has less than $95, she earns $24.15 more; if she has more, she gives $5.22 to her sister.
+How much money does Hana have at the end?
+--- gold ---
+112.22 > 95, so Hana loses 5.22: 112.22-5.22=<<112.22-5.22=107.00>>107.00
+#### 107.00
+
+===== serial d=3 ans=80.80 =====
+Max has $61.78. First, Max counts his money. If it is more than $89, he spends $24.26 on stickers. If not, he earns $7.04 by washing cars. Then, if Max has more than $33, he donates $3.39 to charity; otherwise, he finds $10.07 more. Max is 7 years old. Next, Max counts his money. If it is more than $95, he spends $9.74 on a snack. If not, he earns $15.37 by washing cars.
+How much money does Max have at the end?
+--- gold ---
+61.78 < 89, so Max gains 7.04: 61.78+7.04=<<61.78+7.04=68.82>>68.82
+68.82 > 33, so Max loses 3.39: 68.82-3.39=<<68.82-3.39=65.43>>65.43
+65.43 < 95, so Max gains 15.37: 65.43+15.37=<<65.43+15.37=80.80>>80.80
+#### 80.80
+
+===== serial d=5 ans=22.61 =====
+Owen has $100.98. First, if Owen has less than $112, he earns $3.10 by washing cars; otherwise, he donates $27.76 to charity. Then, Owen counts his money. If it is more than $70, he pays $26.41 for a bus ticket. If not, he saves $14.74 more. Later, Owen counts his money. If it is more than $40, he donates $14.40 to charity. If not, he finds $22.36 more. Later, Owen checks his wallet: if he has less than $46, he saves $10.36 more; if he has more, he spends $24.48 on a snack. After that, Owen counts his money. If it is more than $12, he spends $16.18 on a snack. If not, he earns $20.21 by washing cars. Owen's best friend owns 49 apples.
+How much money does Owen have at the end?
+--- gold ---
+100.98 < 112, so Owen gains 3.10: 100.98+3.10=<<100.98+3.10=104.08>>104.08
+104.08 > 70, so Owen loses 26.41: 104.08-26.41=<<104.08-26.41=77.67>>77.67
+77.67 > 40, so Owen loses 14.40: 77.67-14.40=<<77.67-14.40=63.27>>63.27
+63.27 > 46, so Owen loses 24.48: 63.27-24.48=<<63.27-24.48=38.79>>38.79
+38.79 > 12, so Owen loses 16.18: 38.79-16.18=<<38.79-16.18=22.61>>22.61
+#### 22.61
+
+===== serial d=10 ans=65.47 =====
+Omar has $43.70. First, Omar counts his money. If it is more than $66, he donates $23.58 to charity. If not, he earns $21.30 more. Then, if Omar has more than $61, he gives $16.87 to his cousin; otherwise, he finds $16.11 more. Later, Omar checks his wallet: if he has less than $83, he earns $25.57 more; if he has more, he spends $27.50 on stickers. Next, Omar counts his money. If it is more than $82, he gives $8.51 to his neighbor. If not, he finds $28.04 more. Next, Omar counts his money. If it is more than $72, he gives $18.19 to grandma. If not, he finds $22.32 more. Omar's best friend owns 38 beads. Next, Omar checks his wallet: if he has less than $104, he earns $10.94 by washing cars; if he has more, he spends $25.80 on stickers. After this, if Omar has more than $132, he gives $19.74 to a younger kid; otherwise, he receives $3.55 from a younger kid. Later, if Omar has less than $78, he earns $4.05 more; otherwise, he spends $4.09 on stickers. After this, Omar checks his wallet: if he has less than $86, he earns $14.51 more; if he has more, he donates $2.38 to charity. After that, if Omar has more than $65, he pays $26.10 for a bus ticket; otherwise, he gets $16.83 from his cousin.
+How much money does Omar have at the end?
+--- gold ---
+43.70 < 66, so Omar gains 21.30: 43.70+21.30=<<43.70+21.30=65.00>>65.00
+65.00 > 61, so Omar loses 16.87: 65.00-16.87=<<65.00-16.87=48.13>>48.13
+48.13 < 83, so Omar gains 25.57: 48.13+25.57=<<48.13+25.57=73.70>>73.70
+73.70 < 82, so Omar gains 28.04: 73.70+28.04=<<73.70+28.04=101.74>>101.74
+101.74 > 72, so Omar loses 18.19: 101.74-18.19=<<101.74-18.19=83.55>>83.55
+83.55 < 104, so Omar gains 10.94: 83.55+10.94=<<83.55+10.94=94.49>>94.49
+94.49 < 132, so Omar gains 3.55: 94.49+3.55=<<94.49+3.55=98.04>>98.04
+98.04 > 78, so Omar loses 4.09: 98.04-4.09=<<98.04-4.09=93.95>>93.95
+93.95 > 86, so Omar loses 2.38: 93.95-2.38=<<93.95-2.38=91.57>>91.57
+91.57 > 65, so Omar loses 26.10: 91.57-26.10=<<91.57-26.10=65.47>>65.47
+#### 65.47
+
+===== serial d=20 ans=110.61 =====
+Mia has $25.99. First, Mia checks her wallet: if she has less than $62, she saves $18.68 more; if she has more, she pays $4.94 for a bus ticket. Then, Mia counts her money. If it is more than $59, she spends $6.09 on stickers. If not, she gets $17.36 from her neighbor. Mia's class has 30 students. Later, if Mia has less than $67, she earns $9.32 by washing cars; otherwise, she pays $3.56 for a bus ticket. After that, Mia checks her wallet: if she has less than $34, she receives $12.66 from a classmate; if she has more, she donates $3.11 to charity. Later, if Mia has less than $41, she earns $24.02 more; otherwise, she pays $16.35 for a book. After that, Mia checks her wallet: if she has less than $67, she gets $13.82 from grandma; if she has more, she spends $11.83 on stickers. Then, if Mia has less than $83, she receives $10.86 from a younger kid; otherwise, she donates $17.99 to charity. Then, Mia counts her money. If it is more than $56, she spends $17.82 on a snack. If not, she earns $13.75 by washing cars. Later, Mia checks her wallet: if she has less than $67, she receives $25.54 from her sister; if she has more, she spends $12.38 on stickers. After this, if Mia has less than $117, she receives $21.96 from her sister; otherwise, she pays $19.25 for a book. Next, if Mia has less than $79, she finds $25.72 more; otherwise, she pays $21.07 for a book. Later, Mia checks her wallet: if she has less than $75, she gets $22.33 from her cousin; if she has more, she spends $21.33 on stickers. Next, Mia counts her money. If it is more than $25, she donates $20.82 to charity. If not, she earns $20.50 more. After this, Mia checks her wallet: if she has less than $60, she gets $4.30 from a younger kid; if she has more, she spends $28.91 on a snack. Later, Mia checks her wallet: if she has less than $15, she gets $17.02 from a friend; if she has more, she spends $5.37 on stickers. Then, if Mia has more than $78, she spends $17.52 on a snack; otherwise, she receives $5.35 from grandma. Then, if Mia has less than $61, she finds $16.70 more; otherwise, she pays $19.32 for a bus ticket. Next, if Mia has less than $74, she finds $16.14 more; otherwise, she gives $21.44 to a younger kid. After this, if Mia has more than $103, she pays $19.41 for a book; otherwise, she gets $23.93 from her neighbor. Then, if Mia has less than $116, she earns $6.53 by washing cars; otherwise, she spends $17.89 on a snack.
+How much money does Mia have at the end?
+--- gold ---
+25.99 < 62, so Mia gains 18.68: 25.99+18.68=<<25.99+18.68=44.67>>44.67
+44.67 < 59, so Mia gains 17.36: 44.67+17.36=<<44.67+17.36=62.03>>62.03
+62.03 < 67, so Mia gains 9.32: 62.03+9.32=<<62.03+9.32=71.35>>71.35
+71.35 > 34, so Mia loses 3.11: 71.35-3.11=<<71.35-3.11=68.24>>68.24
+68.24 > 41, so Mia loses 16.35: 68.24-16.35=<<68.24-16.35=51.89>>51.89
+51.89 < 67, so Mia gains 13.82: 51.89+13.82=<<51.89+13.82=65.71>>65.71
+65.71 < 83, so Mia gains 10.86: 65.71+10.86=<<65.71+10.86=76.57>>76.57
+76.57 > 56, so Mia loses 17.82: 76.57-17.82=<<76.57-17.82=58.75>>58.75
+58.75 < 67, so Mia gains 25.54: 58.75+25.54=<<58.75+25.54=84.29>>84.29
+84.29 < 117, so Mia gains 21.96: 84.29+21.96=<<84.29+21.96=106.25>>106.25
+106.25 > 79, so Mia loses 21.07: 106.25-21.07=<<106.25-21.07=85.18>>85.18
+85.18 > 75, so Mia loses 21.33: 85.18-21.33=<<85.18-21.33=63.85>>63.85
+63.85 > 25, so Mia loses 20.82: 63.85-20.82=<<63.85-20.82=43.03>>43.03
+43.03 < 60, so Mia gains 4.30: 43.03+4.30=<<43.03+4.30=47.33>>47.33
+47.33 > 15, so Mia loses 5.37: 47.33-5.37=<<47.33-5.37=41.96>>41.96
+41.96 < 78, so Mia gains 5.35: 41.96+5.35=<<41.96+5.35=47.31>>47.31
+47.31 < 61, so Mia gains 16.70: 47.31+16.70=<<47.31+16.70=64.01>>64.01
+64.01 < 74, so Mia gains 16.14: 64.01+16.14=<<64.01+16.14=80.15>>80.15
+80.15 < 103, so Mia gains 23.93: 80.15+23.93=<<80.15+23.93=104.08>>104.08
+104.08 < 116, so Mia gains 6.53: 104.08+6.53=<<104.08+6.53=110.61>>110.61
+#### 110.61
+
+===== parallel w=3 W=5 ans=48.84,127.50,71.58 =====
+Ryan has $22.77. A box of stickers at the shop has 29 pieces. First, Ryan checks his wallet: if he has less than $52, he receives $26.07 from a younger kid; if he has more, he spends $26.87 on a snack.
+Liam has $118.41. First, Liam counts his money. If it is more than $113, he spends $4.74 on a snack. If not, he receives $28.96 from grandma. Then, if Liam has less than $140, he finds $13.83 more; otherwise, he pays $19.44 for a bus ticket.
+Chloe has $98.63. First, Chloe counts her money. If it is more than $68, she pays $6.01 for a bus ticket. If not, she earns $7.29 by washing cars. Then, if Chloe has less than $78, she earns $5.34 by washing cars; otherwise, she gives $21.04 to a classmate.
+At the end, how much money does each person have? Give the numbers in this order: Ryan, Liam, Chloe.
+--- gold ---
+Ryan:
+22.77 < 52, so Ryan gains 26.07: 22.77+26.07=<<22.77+26.07=48.84>>48.84
+Liam:
+118.41 > 113, so Liam loses 4.74: 118.41-4.74=<<118.41-4.74=113.67>>113.67
+113.67 < 140, so Liam gains 13.83: 113.67+13.83=<<113.67+13.83=127.50>>127.50
+Chloe:
+98.63 > 68, so Chloe loses 6.01: 98.63-6.01=<<98.63-6.01=92.62>>92.62
+92.62 > 78, so Chloe loses 21.04: 92.62-21.04=<<92.62-21.04=71.58>>71.58
+#### 48.84,127.50,71.58
