@@ -28,8 +28,26 @@ MODEL = os.environ.get("MODEL", "Qwen/Qwen3-4B-Instruct-2507")
 REVISION = os.environ.get(
     "MODEL_REVISION", "cdbee75f17c01a7cc42f958dc650907174af0554"
 )
-IN_PATH = sys.argv[1] if len(sys.argv) > 1 else "calib_da_v2_slim.jsonl"
-OUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "raw_outputs_da_v2.jsonl"
+def data_args(argv):
+    """只保留数据文件路径。Colab 把脚本当单元格执行时，sys.argv 里会有 `-f <kernel.json>`。"""
+    args = []
+    skip_next = False
+    for arg in argv[1:]:
+        if skip_next:
+            skip_next = False
+            continue
+        if arg == "-f":
+            skip_next = True
+            continue
+        if arg.startswith("-"):
+            continue
+        args.append(arg)
+    return args
+
+
+_DATA_ARGS = data_args(sys.argv)
+IN_PATH = _DATA_ARGS[0] if len(_DATA_ARGS) > 0 else "calib_da_v2_slim.jsonl"
+OUT_PATH = _DATA_ARGS[1] if len(_DATA_ARGS) > 1 else "raw_outputs_da_v2.jsonl"
 FEW_PATH = os.environ.get("FEW_SHOT", "few_shot.json")
 
 PARAMS = {"temperature": 0.6, "top_p": 0.95, "top_k_recorded_not_passed": 20}

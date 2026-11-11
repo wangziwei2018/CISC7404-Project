@@ -1070,3 +1070,6 @@ DA 准确率 0.10 / 0.03 / 0.01 / 0.00 / 0.00 / 0.01 / 0.01，CoT 准确率 0.90
 DA(1)=0.10，多数是把初始数量原样写回。当时的 DA 系统提示是 “Solve silently...”。
 `Experiments/task_a_wordproblem/calib_da_v2/` 只重跑 DA：提示改为 “Answer with only the final number, in the form #### N.”，
 另加 2 条 d=1、只含答案的 few-shot（seed 20261112），范围 d∈{1,2,3,5,20}×100。这轮结果还没有。原文 `raw_outputs.jsonl` 尚未入库。
+
+2026-11-11 晚，Colab（L4）第一次打开 `colab_calib_da_v2.ipynb` 时在读题前退出：
+单元格直接执行脚本，`sys.argv` 里的 `-f` 被当成输入文件。脚本已改为忽略 Jupyter 的 `-f <kernel.json>`。DA v2 结果仍未产出。
