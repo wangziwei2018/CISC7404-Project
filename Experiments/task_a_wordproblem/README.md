@@ -3,7 +3,7 @@
 现有正式题是 40 行指针查表（`Experiments/data_generation/synthesis_pointer_numeric_dataset.jsonl`）。
 那一版的直接回答（DA）从深度 d=5 起就落到 0，深度梯度主要是地板，不是一条可测的曲线。
 这里是替换候选 `cond_wordproblem_v1`：GSM8K 风格的小学应用题，**只用加减**，小数可选。
-模型校准还没跑，不能把它当成已经定题的正式集。指针题和 Task B 的文件都没有改。
+第一轮整数校准已经跑完，DA 提示还要重测，见下面的 `calib_da_v2/`。不能把它当成已经定题的正式集。指针题和 Task B 的文件都没有改。
 
 外部原型称这一候选为 Task A v4。仓库里 `AGENTS.md` 5.5 的 Task A v3 指的是已经交付的指针题。
 两套题的 `version` 不同，不要混在同一张准确率表里。
@@ -66,7 +66,13 @@ python analyze.py raw_outputs.jsonl
 - 更好的 GPU 使用 bfloat16、`gpu_memory_utilization=0.88`、`max_model_len=4096`。
 - DA 的 `max_tokens` 是 64，CoT 是 2048。这是这道短应用题的校准预算，不是全矩阵的 6144。
 
-`analyze.py` 会写出 `metrics.json`、`accuracy_vs_d.png`、`failure_samples.jsonl`。这些是跑完模型之后的结果，现在还没有，不要提交占位文件。判分和 `generate.grade` 相同：去掉 `$` 和逗号，容差是最小单位的一半。
+`analyze.py` 会写出 `metrics.json`、`accuracy_vs_d.png`、`failure_samples.jsonl`。判分和 `generate.grade` 相同：去掉 `$` 和逗号，容差是最小单位的一半。第一轮的原文 `raw_outputs.jsonl` 还没放进仓库。
+
+## DA 提示词修订（`calib_da_v2/`，结果未出）
+
+第一轮 DA 用的是 “Solve silently...”。d=1,2,3,5,10,15,20 的准确率是 DA 0.10/0.03/0.01/0.00/0.00/0.01/0.01，CoT 0.90/0.95/0.96/0.91/0.77/0.77/0.75。DA(1)=0.10，多数输出只是把初始数量抄回去。
+
+`calib_da_v2/` 只重跑 DA：同一批题里的 d∈{1,2,3,5,20}×100，系统提示改为 `Answer with only the final number, in the form #### N.`，并加 2 条只含 `#### N` 的 d=1 few-shot（seed 20261112）。用法、Colab 笔记本和字段说明在该目录的 `README_cn.md`。这轮结果还没有。
 
 ## 还没做
 

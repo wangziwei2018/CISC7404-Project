@@ -1062,3 +1062,11 @@ Task A 的定题、校准、人工审查、正式串行与配平并行数据、�
 不含乘法。生成器已在 uv 环境里复现整数 / 两位小数样例和 `--mode check --n 500` 的捷径统计；
 整数校准集 700 题（seed 1234）已放入 `calib_int/`。Qwen3-4B 的校准还没跑，正式 3000 题未生成。
 已交付的指针数据没有改动。
+
+## 条件分支应用题第一轮结果与 DA v2（2026-11-11）
+
+Qwen3-4B-Instruct-2507 在 L4 上跑完 `calib_int` 的 1400 条（DA+CoT，d=1,2,3,5,10,15,20 各 100）。
+DA 准确率 0.10 / 0.03 / 0.01 / 0.00 / 0.00 / 0.01 / 0.01，CoT 准确率 0.90 / 0.95 / 0.96 / 0.91 / 0.77 / 0.77 / 0.75。
+DA(1)=0.10，多数是把初始数量原样写回。当时的 DA 系统提示是 “Solve silently...”。
+`Experiments/task_a_wordproblem/calib_da_v2/` 只重跑 DA：提示改为 “Answer with only the final number, in the form #### N.”，
+另加 2 条 d=1、只含答案的 few-shot（seed 20261112），范围 d∈{1,2,3,5,20}×100。这轮结果还没有。原文 `raw_outputs.jsonl` 尚未入库。
