@@ -1086,3 +1086,17 @@ d≥2 几乎全部是截断的 CoT。原文还没入库。
 “Your entire reply must be exactly one line in the form #### N.”；用户消息再提醒一次；
 assistant 预填 “#### ”；`stop=['\n']`，`max_tokens=16`；4 条只含答案的 d=1 few-shot（seed 20261113）。
 主指标是严格正确率。
+
+## DA v3 笔记本结果与 DA v4（2026-11-12）
+
+提交 `3103148`（Colab 保存的 `colab_calib_da_v3.ipynb`）在 L4、bf16 上跑完同一 500 题。
+打印出的严格 DA 准确率是 d=1/2/3/5/20 = 0.70 / 0.08 / 0.03 / 0.00 / 0.02
+（70/100、8/100、3/100、0/100、2/100）。回退口径与严格口径相同，截断率为 0，输出都是单行 `#### N`。
+`raw_outputs_da_v3.jsonl` 还没放进仓库。
+
+`Experiments/task_a_wordproblem/calib_da_v4/` 还没跑。系统提示在 v3 的一行格式要求前面加上
+“You are a math problem solver. Solve the following math problem.”。
+预填仍是 `#### `（含末尾空格），但是最后一条 assistant 消息，用
+`apply_chat_template(..., add_generation_prompt=False, continue_final_message=True)` 续写。
+已完成的 few-shot 仍是完整的 `#### N`。`stop=['\n']`，`max_tokens=16`，温度 0.6，top_p 0.95，
+模型钉在 `cdbee75f17c01a7cc42f958dc650907174af0554`。few-shot 沿用 v3，没有重抽。主指标仍是严格正确率。

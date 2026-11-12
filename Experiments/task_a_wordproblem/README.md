@@ -76,7 +76,11 @@ python analyze.py raw_outputs.jsonl
 
 ## DA v3（`calib_da_v3/`，结果未出）
 
-`calib_da_v3/` 仍是这 500 题，只跑 DA。整段回复被收成一行：系统提示要求恰好一行 `#### N`，用户消息再提醒一次，assistant 预填 `#### `，`stop=['\n']`，`max_tokens=16`，4 条只含答案的 d=1 few-shot（seed 20261113）。主指标是严格正确率。用法在该目录 `README_cn.md`。结果还没有。
+`calib_da_v3/` 仍是这 500 题，只跑 DA。L4 笔记本（`3103148`）上的严格正确率是 0.70/0.08/0.03/0.00/0.02。用法在该目录 `README_cn.md`。原文 jsonl 还没入库。
+
+## DA v4（`calib_da_v4/`，结果未出）
+
+`calib_da_v4/` 用同一 500 题。系统提示在格式要求前加上 “You are a math problem solver. Solve the following math problem.”。预填 `#### ` 是最后一条 assistant 消息，用 `continue_final_message=True` 续写。`stop=['\n']`，`max_tokens=16`，few-shot 沿用 v3。主指标仍是严格正确率。用法在该目录 `README_cn.md`。结果还没有。
 
 ## 还没做
 
