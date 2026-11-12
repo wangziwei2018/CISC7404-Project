@@ -1054,3 +1054,55 @@ notebook 保留默认 offline / GENERATE_FINAL=False，避免重复推理或写�
 
 Task A 的定题、校准、人工审查、正式串行与配平并行数据、文档回填均完成；接受的指标例外继续保留。
 本次仅生成并验证题集，没有执行正式全矩阵推理、Task B 或合并复核。
+
+## 条件分支应用题候选入库（2026-11-11）
+
+指针 lookup 的 DA 从 d=5 起为 0，深度曲线贴着地板。新增替换候选
+`Experiments/task_a_wordproblem/`（`cond_wordproblem_v1`）：每步比较阈值后做一次加或减，
+不含乘法。生成器已在 uv 环境里复现整数 / 两位小数样例和 `--mode check --n 500` 的捷径统计；
+整数校准集 700 题（seed 1234）已放入 `calib_int/`。Qwen3-4B 的校准还没跑，正式 3000 题未生成。
+已交付的指针数据没有改动。
+
+## 条件分支应用题第一轮结果与 DA v2（2026-11-11）
+
+Qwen3-4B-Instruct-2507 在 L4 上跑完 `calib_int` 的 1400 条（DA+CoT，d=1,2,3,5,10,15,20 各 100）。
+DA 准确率 0.10 / 0.03 / 0.01 / 0.00 / 0.00 / 0.01 / 0.01，CoT 准确率 0.90 / 0.95 / 0.96 / 0.91 / 0.77 / 0.77 / 0.75。
+DA(1)=0.10，多数是把初始数量原样写回。当时的 DA 系统提示是 “Solve silently...”。
+`Experiments/task_a_wordproblem/calib_da_v2/` 只重跑 DA：提示改为 “Answer with only the final number, in the form #### N.”，
+另加 2 条 d=1、只含答案的 few-shot（seed 20261112），范围 d∈{1,2,3,5,20}×100。这轮结果还没有。原文 `raw_outputs.jsonl` 尚未入库。
+
+2026-11-11 晚，Colab（L4）第一次打开 `colab_calib_da_v2.ipynb` 时在读题前退出：
+单元格直接执行脚本，`sys.argv` 里的 `-f` 被当成输入文件。脚本已改为忽略 Jupyter 的 `-f <kernel.json>`。DA v2 结果仍未产出。
+
+## DA v2 实测与 DA v3（2026-11-12）
+
+修好 `-f` 之后，Qwen3-4B-Instruct-2507 在 L4、bf16 上跑完同一 500 题（d=1,2,3,5,20 各 100）。
+回退口径的 DA v2 准确率是 0.66 / 0.01 / 0.00 / 0.00 / 0.00。旧 DA 在这五档是 0.10 / 0.03 / 0.01 / 0.00 / 0.01。
+d=1 的 0.66 偏高：54/100 打满 `max_tokens=64`，模型写成了 CoT；严格只认 `####` 的正确数是 36/100；
+29 个“正确”来自截断 CoT 的回退解析；另有 10 条写出了 `####` 但数字是错的，其中 6 条回写了初始数量。
+d≥2 几乎全部是截断的 CoT。原文还没入库。
+
+`Experiments/task_a_wordproblem/calib_da_v3/` 尚未出结果。改动是：系统提示
+“Your entire reply must be exactly one line in the form #### N.”；用户消息再提醒一次；
+assistant 预填 “#### ”；`stop=['\n']`，`max_tokens=16`；4 条只含答案的 d=1 few-shot（seed 20261113）。
+主指标是严格正确率。
+
+## DA v3 笔记本结果与 DA v4（2026-11-12）
+
+提交 `3103148`（Colab 保存的 `colab_calib_da_v3.ipynb`）在 L4、bf16 上跑完同一 500 题。
+打印出的严格 DA 准确率是 d=1/2/3/5/20 = 0.70 / 0.08 / 0.03 / 0.00 / 0.02
+（70/100、8/100、3/100、0/100、2/100）。回退口径与严格口径相同，截断率为 0，输出都是单行 `#### N`。
+`raw_outputs_da_v3.jsonl` 还没放进仓库。
+
+`Experiments/task_a_wordproblem/calib_da_v4/` 还没跑。系统提示在 v3 的一行格式要求前面加上
+“You are a math problem solver. Solve the following math problem.”。
+预填仍是 `#### `（含末尾空格），但是最后一条 assistant 消息，用
+`apply_chat_template(..., add_generation_prompt=False, continue_final_message=True)` 续写。
+已完成的 few-shot 仍是完整的 `#### N`。`stop=['\n']`，`max_tokens=16`，温度 0.6，top_p 0.95，
+模型钉在 `cdbee75f17c01a7cc42f958dc650907174af0554`。few-shot 沿用 v3，没有重抽。主指标仍是严格正确率。
+
+## DA v5 待跑（2026-11-12）
+
+`Experiments/task_a_wordproblem/calib_da_v5/` 还没跑，没有 `raw_outputs`。提示、500 题、4 条 few-shot、预填和采样都与 v4 相同。
+模型换成 `Qwen/Qwen3-4B`（2025-04 混合模型，revision `1cfa9a7208912126459214e8b04321603b3df60c`），不是 `Qwen3-4B-Base`，也不是 `Qwen3-4B-Instruct-2507`。
+`enable_thinking=False`。官方模板在最后一条 assistant 预填前写入一个空的 `<think></think>`，生成从 `#### ` 后面继续，不从打开的思考块里面开始。主指标仍是严格正确率。

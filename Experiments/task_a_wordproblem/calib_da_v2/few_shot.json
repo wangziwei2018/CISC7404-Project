@@ -1,0 +1,42 @@
+{
+  "prompt_version": "da_v2",
+  "seed": 20261112,
+  "config": "cond_addsub_dec0",
+  "generator": "cond_wordproblem_v1 / generate.py",
+  "note": "Two d=1 items generated with seed 20261112 (different from calib_set seed 1234). Question text, qid, number sequence, and (initial,T,a,b,ans) do not match any calib_set item. Neither example answer is a gold answer in the 500-item eval slice. The two examples have disjoint numbers, different names/items, and opposite branches. Assistant turns contain only '#### N' — no solution steps.",
+  "system": "Answer with only the final number, in the form #### N.",
+  "examples": [
+    {
+      "i": 183,
+      "d": 1,
+      "qid": "46e9dd1920cc5e84b96b79debdf1ba0a79037fbab9e85787ba7b7490709ba5f5",
+      "q": "Grace has 112 stickers. First, if Grace has fewer than 151 stickers, she gets 11 more from a friend; otherwise, she trades away 13. Grace's class has 51 students.\nHow many stickers does Grace have at the end?",
+      "ans": "123",
+      "assistant": "#### 123",
+      "taken": "gain",
+      "name": "Grace",
+      "item": "stickers",
+      "initial": "112",
+      "T": "151",
+      "a": "13",
+      "b": "11",
+      "solution_not_shown_to_model": "112 < 151, so Grace gains 11: 112+11=<<112+11=123>>123\n#### 123"
+    },
+    {
+      "i": 187,
+      "d": 1,
+      "qid": "7925cbbb7a9e8e71521ae260014e6b37a07393bc25759cba6dc37bec4d82a1a6",
+      "q": "Lily has 97 beads. Lily's class has 28 students. First, Lily counts her beads. If there are more than 66, she gives 2 of them to a younger kid. If not, she finds 5 more.\nHow many beads does Lily have at the end?",
+      "ans": "95",
+      "assistant": "#### 95",
+      "taken": "loss",
+      "name": "Lily",
+      "item": "beads",
+      "initial": "97",
+      "T": "66",
+      "a": "2",
+      "b": "5",
+      "solution_not_shown_to_model": "97 > 66, so Lily loses 2: 97-2=<<97-2=95>>95\n#### 95"
+    }
+  ]
+}

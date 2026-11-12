@@ -1,0 +1,21 @@
+overall (serial): {"sum_all_numbers": 0.0, "apply_both_clauses": 0.0084, "always_loss": 0.0338, "always_gain": 0.0399, "ans_in_text": 0.0, "last_threshold_guess": 0.0194, "start_unchanged": 0.0, "single_branch_error_still_correct": 0.0275, "loss_branch_share": 0.4584, "n_serial": 10000}
+ d= 1 n=500 chars~201 both=0.000 aL=0.480 aG=0.520 in_text=0.000 lastT=0.026 flip_ok=0.000
+ d= 2 n=500 chars~306 both=0.030 aL=0.196 aG=0.278 in_text=0.000 lastT=0.016 flip_ok=0.005
+ d= 3 n=500 chars~413 both=0.016 aL=0.000 aG=0.000 in_text=0.000 lastT=0.024 flip_ok=0.013
+ d= 4 n=500 chars~519 both=0.004 aL=0.000 aG=0.000 in_text=0.000 lastT=0.022 flip_ok=0.015
+ d= 5 n=500 chars~626 both=0.018 aL=0.000 aG=0.000 in_text=0.000 lastT=0.020 flip_ok=0.012
+ d= 6 n=500 chars~731 both=0.004 aL=0.000 aG=0.000 in_text=0.000 lastT=0.016 flip_ok=0.015
+ d= 7 n=500 chars~839 both=0.010 aL=0.000 aG=0.000 in_text=0.000 lastT=0.024 flip_ok=0.019
+ d= 8 n=500 chars~944 both=0.006 aL=0.000 aG=0.000 in_text=0.000 lastT=0.016 flip_ok=0.024
+ d= 9 n=500 chars~1054 both=0.012 aL=0.000 aG=0.000 in_text=0.000 lastT=0.020 flip_ok=0.020
+ d=10 n=500 chars~1159 both=0.008 aL=0.000 aG=0.000 in_text=0.000 lastT=0.026 flip_ok=0.023
+ d=11 n=500 chars~1265 both=0.010 aL=0.000 aG=0.000 in_text=0.000 lastT=0.024 flip_ok=0.027
+ d=12 n=500 chars~1374 both=0.008 aL=0.000 aG=0.000 in_text=0.000 lastT=0.036 flip_ok=0.028
+ d=13 n=500 chars~1479 both=0.002 aL=0.000 aG=0.000 in_text=0.000 lastT=0.012 flip_ok=0.033
+ d=14 n=500 chars~1582 both=0.008 aL=0.000 aG=0.000 in_text=0.000 lastT=0.026 flip_ok=0.025
+ d=15 n=500 chars~1691 both=0.006 aL=0.000 aG=0.000 in_text=0.000 lastT=0.014 flip_ok=0.027
+ d=16 n=500 chars~1799 both=0.010 aL=0.000 aG=0.000 in_text=0.000 lastT=0.016 flip_ok=0.031
+ d=17 n=500 chars~1904 both=0.006 aL=0.000 aG=0.000 in_text=0.000 lastT=0.022 flip_ok=0.028
+ d=18 n=500 chars~2011 both=0.006 aL=0.000 aG=0.000 in_text=0.000 lastT=0.004 flip_ok=0.033
+ d=19 n=500 chars~2122 both=0.002 aL=0.000 aG=0.000 in_text=0.000 lastT=0.012 flip_ok=0.036
+ d=20 n=500 chars~2232 both=0.002 aL=0.000 aG=0.000 in_text=0.000 lastT=0.012 flip_ok=0.035

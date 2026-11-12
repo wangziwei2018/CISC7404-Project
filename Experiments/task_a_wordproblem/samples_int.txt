@@ -1,0 +1,93 @@
+wrote 45 records -> samples.jsonl (deterministic, all gold re-solved)
+overall (serial): {"sum_all_numbers": 0.0, "apply_both_clauses": 0.0, "always_loss": 0.08, "always_gain": 0.12, "ans_in_text": 0.0, "last_threshold_guess": 0.0, "start_unchanged": 0.0, "single_branch_error_still_correct": 0.0205, "loss_branch_share": 0.4308, "n_serial": 25}
+ d= 1 n=5 chars~212 both=0.000 aL=0.400 aG=0.600 in_text=0.000 lastT=0.000 flip_ok=0.000
+ d= 3 n=5 chars~424 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.000
+ d= 5 n=5 chars~637 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.000
+ d=10 n=5 chars~1147 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.020
+ d=20 n=5 chars~2186 both=0.000 aL=0.000 aG=0.000 in_text=0.000 lastT=0.000 flip_ok=0.030
+parallel (w,W,chars): [(1, 1, 200), (1, 1, 250), (3, 5, 600), (3, 5, 650), (3, 5, 700), (3, 5, 750), (5, 9, 1100), (5, 9, 1150), (5, 9, 1200), (10, 19, 2250), (10, 19, 2400), (10, 19, 2450)]
+
+===== serial d=1 ans=98 =====
+Omar has 79 beads. First, Omar counts his beads. If there are more than 99, he donates 18 to his neighbor. If not, he gets 19 more from his neighbor. Omar's best friend owns 52 candies.
+How many beads does Omar have at the end?
+--- gold ---
+79 < 99, so Omar gains 19: 79+19=<<79+19=98>>98
+#### 98
+
+===== serial d=3 ans=66 =====
+Ethan has 80 stamps. Ethan's class has 56 students. First, if Ethan has fewer than 44 stamps, he buys 22 more; otherwise, he sells 25 of them. Then, if Ethan has more than 40 stamps, he donates 18 to a classmate; otherwise, he collects 11 more. Later, Ethan checks his stamps: if he has fewer than 68, he finds 29 more; if he has more, he loses 23.
+How many stamps does Ethan have at the end?
+--- gold ---
+80 > 44, so Ethan loses 25: 80-25=<<80-25=55>>55
+55 > 40, so Ethan loses 18: 55-18=<<55-18=37>>37
+37 < 68, so Ethan gains 29: 37+29=<<37+29=66>>66
+#### 66
+
+===== serial d=5 ans=43 =====
+Ruby has 55 stamps. Ruby's class has 15 students. First, if Ruby has fewer than 49 stamps, she finds 15 more; otherwise, she donates 28 to her neighbor. Then, Ruby counts her stamps. If there are more than 19, she donates 2 to her sister. If not, she collects 21 more. After this, if Ruby has fewer than 14 stamps, she collects 20 more; otherwise, she gives 22 of them to grandma. After this, if Ruby has fewer than 15 stamps, she receives 17 more; otherwise, she gives 27 of them to a classmate. Next, Ruby counts her stamps. If there are more than 34, she gives away 13. If not, she buys 23 more.
+How many stamps does Ruby have at the end?
+--- gold ---
+55 > 49, so Ruby loses 28: 55-28=<<55-28=27>>27
+27 > 19, so Ruby loses 2: 27-2=<<27-2=25>>25
+25 > 14, so Ruby loses 22: 25-22=<<25-22=3>>3
+3 < 15, so Ruby gains 17: 3+17=<<3+17=20>>20
+20 < 34, so Ruby gains 23: 20+23=<<20+23=43>>43
+#### 43
+
+===== serial d=10 ans=108 =====
+Mia has 24 shells. A box of apples at the shop has 56 pieces. First, Mia checks her shells: if she has fewer than 50, she collects 28 more; if she has more, she gives 2 of them to a classmate. Then, Mia counts her shells. If there are more than 36, she donates 12 to her cousin. If not, she gets 25 more from her cousin. Then, Mia counts her shells. If there are more than 59, she sells 26 of them. If not, she buys 27 more. After that, Mia counts her shells. If there are more than 97, she donates 24 to a friend. If not, she receives 18 more. Next, if Mia has fewer than 56 shells, she buys 15 more; otherwise, she gives away 26. Then, if Mia has fewer than 70 shells, she wins 4 more; otherwise, she loses 5. Then, Mia checks her shells: if she has fewer than 37, she wins 20 more; if she has more, she gives away 11. After that, Mia checks her shells: if she has fewer than 60, she gets 16 more from her sister; if she has more, she gives away 3. Later, if Mia has more than 98 shells, she uses up 28; otherwise, she finds 20 more. Next, Mia counts her shells. If there are more than 104, she gives 12 of them to her sister. If not, she buys 20 more.
+How many shells does Mia have at the end?
+--- gold ---
+24 < 50, so Mia gains 28: 24+28=<<24+28=52>>52
+52 > 36, so Mia loses 12: 52-12=<<52-12=40>>40
+40 < 59, so Mia gains 27: 40+27=<<40+27=67>>67
+67 < 97, so Mia gains 18: 67+18=<<67+18=85>>85
+85 > 56, so Mia loses 26: 85-26=<<85-26=59>>59
+59 < 70, so Mia gains 4: 59+4=<<59+4=63>>63
+63 > 37, so Mia loses 11: 63-11=<<63-11=52>>52
+52 < 60, so Mia gains 16: 52+16=<<52+16=68>>68
+68 < 98, so Mia gains 20: 68+20=<<68+20=88>>88
+88 < 104, so Mia gains 20: 88+20=<<88+20=108>>108
+#### 108
+
+===== serial d=20 ans=70 =====
+Chloe has 40 marbles. First, if Chloe has fewer than 67 marbles, she wins 16 more; otherwise, she uses up 15. Then, if Chloe has more than 72 marbles, she donates 25 to a younger kid; otherwise, she finds 19 more. After this, Chloe checks her marbles: if she has fewer than 71, she collects 24 more; if she has more, she gives 15 of them to grandma. After this, Chloe counts her marbles. If there are more than 94, she donates 6 to her sister. If not, she receives 2 more. Then, if Chloe has more than 99 marbles, she uses up 25; otherwise, she collects 3 more. Later, if Chloe has fewer than 55 marbles, she collects 20 more; otherwise, she gives 16 of them to a younger kid. After this, Chloe counts her marbles. If there are more than 21, she uses up 11. If not, she buys 20 more. Then, Chloe counts her marbles. If there are more than 64, she trades away 20. If not, she gets 20 more from her neighbor. After that, if Chloe has more than 49 marbles, she loses 26; otherwise, she buys 19 more. After this, Chloe counts her marbles. If there are more than 52, she gives away 12. If not, she finds 27 more. Next, if Chloe has more than 30 marbles, she sells 29 of them; otherwise, she wins 27 more. Next, if Chloe has fewer than 21 marbles, she receives 5 more; otherwise, she loses 12. After that, if Chloe has more than 41 marbles, she gives away 5; otherwise, she buys 26 more. Chloe is 9 years old. Then, if Chloe has fewer than 37 marbles, she wins 18 more; otherwise, she gives away 9. Next, if Chloe has more than 74 marbles, she loses 18; otherwise, she buys 5 more. Next, if Chloe has more than 71 marbles, she trades away 25; otherwise, she receives 24 more. Then, Chloe counts her marbles. If there are more than 94, she trades away 6. If not, she finds 14 more. Later, if Chloe has fewer than 48 marbles, she finds 20 more; otherwise, she loses 6. Later, Chloe counts her marbles. If there are more than 103, she gives 4 of them to grandma. If not, she wins 16 more. Next, Chloe checks her marbles: if she has fewer than 51, she finds 6 more; if she has more, she uses up 18.
+How many marbles does Chloe have at the end?
+--- gold ---
+40 < 67, so Chloe gains 16: 40+16=<<40+16=56>>56
+56 < 72, so Chloe gains 19: 56+19=<<56+19=75>>75
+75 > 71, so Chloe loses 15: 75-15=<<75-15=60>>60
+60 < 94, so Chloe gains 2: 60+2=<<60+2=62>>62
+62 < 99, so Chloe gains 3: 62+3=<<62+3=65>>65
+65 > 55, so Chloe loses 16: 65-16=<<65-16=49>>49
+49 > 21, so Chloe loses 11: 49-11=<<49-11=38>>38
+38 < 64, so Chloe gains 20: 38+20=<<38+20=58>>58
+58 > 49, so Chloe loses 26: 58-26=<<58-26=32>>32
+32 < 52, so Chloe gains 27: 32+27=<<32+27=59>>59
+59 > 30, so Chloe loses 29: 59-29=<<59-29=30>>30
+30 > 21, so Chloe loses 12: 30-12=<<30-12=18>>18
+18 < 41, so Chloe gains 26: 18+26=<<18+26=44>>44
+44 > 37, so Chloe loses 9: 44-9=<<44-9=35>>35
+35 < 74, so Chloe gains 5: 35+5=<<35+5=40>>40
+40 < 71, so Chloe gains 24: 40+24=<<40+24=64>>64
+64 < 94, so Chloe gains 14: 64+14=<<64+14=78>>78
+78 > 48, so Chloe loses 6: 78-6=<<78-6=72>>72
+72 < 103, so Chloe gains 16: 72+16=<<72+16=88>>88
+88 > 51, so Chloe loses 18: 88-18=<<88-18=70>>70
+#### 70
+
+===== parallel w=3 W=5 ans=79,134,148 =====
+Ethan has 70 buttons. Ethan is 12 years old. First, if Ethan has more than 83 buttons, he loses 12; otherwise, he collects 9 more.
+Ava has 103 buttons. First, if Ava has fewer than 130 buttons, she finds 22 more; otherwise, she sells 8 of them. Then, if Ava has more than 138 buttons, she uses up 25; otherwise, she receives 9 more.
+Ivy has 118 buttons. First, if Ivy has more than 126 buttons, she loses 3; otherwise, she wins 24 more. Then, if Ivy has more than 152 buttons, she loses 14; otherwise, she gets 6 more from her cousin.
+At the end, how many buttons does each person have? Give the numbers in this order: Ethan, Ava, Ivy.
+--- gold ---
+Ethan:
+70 < 83, so Ethan gains 9: 70+9=<<70+9=79>>79
+Ava:
+103 < 130, so Ava gains 22: 103+22=<<103+22=125>>125
+125 < 138, so Ava gains 9: 125+9=<<125+9=134>>134
+Ivy:
+118 < 126, so Ivy gains 24: 118+24=<<118+24=142>>142
+142 < 152, so Ivy gains 6: 142+6=<<142+6=148>>148
+#### 79,134,148
