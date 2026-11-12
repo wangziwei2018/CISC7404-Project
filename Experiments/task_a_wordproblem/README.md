@@ -72,7 +72,11 @@ python analyze.py raw_outputs.jsonl
 
 第一轮 DA 用的是 “Solve silently...”。d=1,2,3,5,10,15,20 的准确率是 DA 0.10/0.03/0.01/0.00/0.00/0.01/0.01，CoT 0.90/0.95/0.96/0.91/0.77/0.77/0.75。DA(1)=0.10，多数输出只是把初始数量抄回去。
 
-`calib_da_v2/` 只重跑 DA：同一批题里的 d∈{1,2,3,5,20}×100，系统提示改为 `Answer with only the final number, in the form #### N.`，并加 2 条只含 `#### N` 的 d=1 few-shot（seed 20261112）。用法、Colab 笔记本和字段说明在该目录的 `README_cn.md`。这轮结果还没有。
+`calib_da_v2/` 只重跑 DA：同一批题里的 d∈{1,2,3,5,20}×100，系统提示改为 `Answer with only the final number, in the form #### N.`，并加 2 条只含 `#### N` 的 d=1 few-shot（seed 20261112）。L4 上回退准确率是 0.66/0.01/0.00/0.00/0.00；d=1 的 0.66 含截断 CoT 的回退解析，严格 `####` 正确是 36/100。细节在 `record.md`。
+
+## DA v3（`calib_da_v3/`，结果未出）
+
+`calib_da_v3/` 仍是这 500 题，只跑 DA。整段回复被收成一行：系统提示要求恰好一行 `#### N`，用户消息再提醒一次，assistant 预填 `#### `，`stop=['\n']`，`max_tokens=16`，4 条只含答案的 d=1 few-shot（seed 20261113）。主指标是严格正确率。用法在该目录 `README_cn.md`。结果还没有。
 
 ## 还没做
 

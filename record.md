@@ -1073,3 +1073,16 @@ DA(1)=0.10，多数是把初始数量原样写回。当时的 DA 系统提示是
 
 2026-11-11 晚，Colab（L4）第一次打开 `colab_calib_da_v2.ipynb` 时在读题前退出：
 单元格直接执行脚本，`sys.argv` 里的 `-f` 被当成输入文件。脚本已改为忽略 Jupyter 的 `-f <kernel.json>`。DA v2 结果仍未产出。
+
+## DA v2 实测与 DA v3（2026-11-12）
+
+修好 `-f` 之后，Qwen3-4B-Instruct-2507 在 L4、bf16 上跑完同一 500 题（d=1,2,3,5,20 各 100）。
+回退口径的 DA v2 准确率是 0.66 / 0.01 / 0.00 / 0.00 / 0.00。旧 DA 在这五档是 0.10 / 0.03 / 0.01 / 0.00 / 0.01。
+d=1 的 0.66 偏高：54/100 打满 `max_tokens=64`，模型写成了 CoT；严格只认 `####` 的正确数是 36/100；
+29 个“正确”来自截断 CoT 的回退解析；另有 10 条写出了 `####` 但数字是错的，其中 6 条回写了初始数量。
+d≥2 几乎全部是截断的 CoT。原文还没入库。
+
+`Experiments/task_a_wordproblem/calib_da_v3/` 尚未出结果。改动是：系统提示
+“Your entire reply must be exactly one line in the form #### N.”；用户消息再提醒一次；
+assistant 预填 “#### ”；`stop=['\n']`，`max_tokens=16`；4 条只含答案的 d=1 few-shot（seed 20261113）。
+主指标是严格正确率。
