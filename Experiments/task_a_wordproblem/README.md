@@ -82,6 +82,10 @@ python analyze.py raw_outputs.jsonl
 
 `calib_da_v4/` 用同一 500 题。系统提示在格式要求前加上 “You are a math problem solver. Solve the following math problem.”。预填 `#### ` 是最后一条 assistant 消息，用 `continue_final_message=True` 续写。`stop=['\n']`，`max_tokens=16`，few-shot 沿用 v3。主指标仍是严格正确率。用法在该目录 `README_cn.md`。结果还没有。
 
+## DA v5（`calib_da_v5/`，结果未出）
+
+`calib_da_v5/` 与 v4 用同一套题和提示。模型换成 `Qwen/Qwen3-4B`（revision `1cfa9a7208912126459214e8b04321603b3df60c`），并设 `enable_thinking=False`。不是 Base，也不是 Instruct-2507。用法在该目录 `README_cn.md`。结果还没有。
+
 ## 还没做
 
 探针、斜率、人工审核和正式 3000 题都还没做。`full.jsonl` 不要在校准完成前当作正式数据提交。

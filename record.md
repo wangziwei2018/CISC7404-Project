@@ -1100,3 +1100,9 @@ assistant 预填 “#### ”；`stop=['\n']`，`max_tokens=16`；4 条只含答�
 `apply_chat_template(..., add_generation_prompt=False, continue_final_message=True)` 续写。
 已完成的 few-shot 仍是完整的 `#### N`。`stop=['\n']`，`max_tokens=16`，温度 0.6，top_p 0.95，
 模型钉在 `cdbee75f17c01a7cc42f958dc650907174af0554`。few-shot 沿用 v3，没有重抽。主指标仍是严格正确率。
+
+## DA v5 待跑（2026-11-12）
+
+`Experiments/task_a_wordproblem/calib_da_v5/` 还没跑，没有 `raw_outputs`。提示、500 题、4 条 few-shot、预填和采样都与 v4 相同。
+模型换成 `Qwen/Qwen3-4B`（2025-04 混合模型，revision `1cfa9a7208912126459214e8b04321603b3df60c`），不是 `Qwen3-4B-Base`，也不是 `Qwen3-4B-Instruct-2507`。
+`enable_thinking=False`。官方模板在最后一条 assistant 预填前写入一个空的 `<think></think>`，生成从 `#### ` 后面继续，不从打开的思考块里面开始。主指标仍是严格正确率。
