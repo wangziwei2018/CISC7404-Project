@@ -92,6 +92,16 @@
 | `Experiments/data_generation/synthesis_pointer_numeric_dataset.jsonl` | 已交付3000条正式数据；同名 `.manifest.json` 记录来源、审核及SHA256 |
 | `calib_v3_task.jsonl` | p1 探针 + 斜率验证结果 |
 
+### A.5 替换候选：条件分支应用题（校准未跑，2026-11-11）
+
+指针查表的 DA 从 d=5 起为 0。替换候选放在 `Experiments/task_a_wordproblem/`，版本 `cond_wordproblem_v1`。
+它是 GSM8K 风格的应用题，每一步把当前数量和阈值比较，大于则减 a，小于则加 b，**只有加减**。
+串行 d=1..20，并行 w=1..10 且 `W=2w−1`，与上面的配平方式相同。小数可用 `--decimals 1|2`，默认整数。
+
+- 生成、捷径检查、Colab / `run_calib.py` 校准和 `analyze.py` 汇总见该目录 `README.md`。
+- 整数校准集 700 题（seed 1234）已入库。模型结果还没有，A.0 的门槛尚未在这道题上测量。
+- 这一候选和已经交付的 3000 道指针题分开统计。人工接受前不要把 `full.jsonl` 当成正式数据。
+- 已交付的指针 JSONL 和 Task B 文件都没有改。
 
 ---
 

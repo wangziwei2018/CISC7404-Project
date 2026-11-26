@@ -86,7 +86,8 @@ jupyter server --ServerApp.allow_remote_access True   # 需要远程访问时
 │   ├── experiment_pointer_track.ipynb
 │   ├── experiment_calibration_v2(1).ipynb   4B 校准 v2 的实际代码（未提交）
 │   ├── calib_v2_results_tierB.jsonl         校准 v2 原始结果（未提交，2420 条）
-│   └── calibration_v2_summary_tierB.csv     校准 v2 聚合表（未提交）
+│   ├── calibration_v2_summary_tierB.csv     校准 v2 聚合表（未提交）
+│   └── task_a_wordproblem/       加减应用题替换候选（校准未跑；见该目录 README）
 ├── gsm8k_dataset/                gitignore；由 notebook 生成
 ├── ifeval/                       gitignore；由 notebook 生成
 ├── models/                       gitignore；Qwen3-1.7B 已下载；4B 权重在 Colab，本地不下载
@@ -289,11 +290,22 @@ vLLM 0.33.0 的本次 Colab 运行中该字段为空，但模型本身已经加�
   `q` 才是模型题干，不能把 `trace` / `answers` / `ans` 等gold元数据传给模型。
   正式全矩阵推理、Task B 与合并复核未执行。
 
+### 5.6 加减应用题替换候选（校准未跑）
+
+指针 lookup 的 DA 从 d=5 起为 0。替换候选在 `Experiments/task_a_wordproblem/`，
+版本 `cond_wordproblem_v1`：每步比较阈值后加或减，没有乘法。
+生成器和整数 700 题校准集已入库；Qwen3-4B 结果还没有，不能当作正式题替换 5.5 的 3000 题。
+`calib_int/run_calib.py` 在 T4 上使用第 3.4 节的加载参数；算力 ≥ 8 的 GPU 用 bfloat16、
+`gpu_memory_utilization=0.88`、`max_model_len=4096`。DA / CoT 的 `max_tokens` 分别是 64 和 2048。
+采样仍是 0.6 / 0.95，不传 `enable_thinking`。说明见该目录 `README.md`。
+
 ## 6. 待办与未定项
 
 **一周双轨（2026-11-07 起，详见 `record.md`「一周行动计划」）：**
 
 - **轨道 1：问题集** —— 找一个 CoT 在 `d=1..20` 上有可测梯度的任务。
+  指针 lookup 已按例外交付，但 DA 从 d=5 起为 0。下一候选是
+  `Experiments/task_a_wordproblem/` 的加减应用题，校准尚未运行。
   - 第一天对 3 个候选任务各跑 `d=1 × 100 题 × DA`，量 p1；目标窗口 `0.955–0.986`。
   - 候选优先级：双寄存器条件更新（首选）> 编号数组指针 > 定长槽位覆盖写 > 栈操作。
   - 验收：`CoT(d=20) ∈ 0.40–0.75`、`DA(d=20) ≤ 0.10`（接受地板）、`gap(20) − gap(1) ≥ 0.30`、
